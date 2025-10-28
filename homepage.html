@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SobatCurhat - Home</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #FFFEF0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .HomePage {
+      width: 414px;
+      height: 896px;
+      margin: 0 auto;
+      position: relative;
+      background: #FFFEF0;
+      overflow: hidden;
+      border: 1px solid #ccc;
+    }
+
+    /* Hilangkan notifikasi bar */
+    .Notification {
+      display: none;
+    }
+
+    /* Search bar */
+    .Search {
+      width: 300px;
+      height: 43px;
+      left: 16px;
+      top: 40px;
+      position: absolute;
+      background: linear-gradient(180deg, #FFEB3B 0%, #FF9800 100%);
+      opacity: 0.9;
+      border-radius: 20px;
+      border: 1px solid black;
+      display: flex;
+      align-items: center;
+      padding-left: 15px;
+    }
+
+    .Search input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 18px;
+      background: transparent;
+      margin-left: 10px;
+    }
+
+    /* Profil */
+    .Profile {
+      position: absolute;
+      right: 20px;
+      top: 40px;
+    }
+
+    /* Welcome Section */
+    .welcome-box {
+      width: 383px;
+      height: 161px;
+      left: 15px;
+      top: 110px;
+      position: absolute;
+      background: linear-gradient(180deg, #FFEB3B 0%, #FF9800 100%);
+      border-radius: 20px;
+      border: 1px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .welcome-box h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    /* Layanan Section */
+    .Layanan {
+      position: absolute;
+      top: 300px;
+      left: 150px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .service-container {
+      position: absolute;
+      top: 360px;
+      left: 16px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .service-card {
+      width: 120px;
+      height: 152px;
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #ddd;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover {
+      transform: scale(1.05);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    /* Untuk Anda */
+    .UntukAnda {
+      position: absolute;
+      top: 540px;
+      left: 23px;
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .Rekomendasi {
+      position: absolute;
+      top: 590px;
+      left: 23px;
+      display: flex;
+      gap: 26px;
+    }
+
+    .Rekomendasi img {
+      width: 171px;
+      height: 171px;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    .caption {
+      position: absolute;
+      color: #444;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .caption.left {
+      top: 770px;
+      left: 40px;
+      width: 150px;
+    }
+
+    .caption.right {
+      top: 770px;
+      left: 240px;
+      width: 150px;
+    }
+
+    /* Footer */
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    .rekomendasi-card {
+      width: 171px;
+      height: 171px;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid #000; /* border agar terlihat card */
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .rekomendasi-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .rekomendasi-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0; /* biar mengikuti div wrapper */
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="HomePage">
+
+    <div class="Search">
+      🔍 <input type="text" placeholder="Cari...">
+    </div>
+
+    <div class="Profile">
+      <img src="assets/profile.png" alt="Profile" width="43" height="43" style="border-radius:50%;">
+    </div>
+
+    <div class="welcome-box">
+      <h1>Selamat datang!<br>Bagaimana harimu?</h1>
+    </div>
+
+    <div class="Layanan">Layanan</div>
+
+    <div class="service-container">
+      <div class="service-card" onclick="window.location.href='Journaling.html'">
+        <img src="assets/home_to_journaling.png" alt="Journaling">      
+        <p>Journaling</p>
+      </div>
+
+      <!-- Klik gambar ChatBot langsung masuk ke chatbot.html -->
+      <div class="service-card" onclick="window.location.href='chatbot.html'">
+        <img src="assets/home_to_chatbot.png" alt="ChatBot">
+        <p>ChatBot</p>
+      </div>
+
+      <div class="service-card" onclick="window.location.href='kuisioner.html'">
+        <img src="assets/home_to_questionnaire.png" alt="Kuesioner">
+        <p>Kuesioner</p>
+      </div>
+    </div>
+
+    <div class="UntukAnda">Untuk Anda</div>
+
+    <div class="Rekomendasi">
+      <div class="rekomendasi-card" onclick="window.location.href='layanan.html'">
+        <img src="assets/Layanan Kejiwaan.png" alt="Layanan Kejiwaan">
+      </div>
+
+      <div class="rekomendasi-card" onclick="window.location.href='menu.html'">
+        <img src="assets/Menu & Notifikasi.png" alt="Menu & Notifikasi">
+      </div>
+    </div>
+
+    <div class="caption left">Layanan Kejiwaan</div>
+    <div class="caption right">Menu & Notifikasi</div>
+
+    <div class="footer">© 2025 SobatCurhat</div>
+  </div>
+
+</body>
+</html>

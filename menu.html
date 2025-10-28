@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu & Notifikasi</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Font and Utility */
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; }
+        /* Custom Gradient from the original design: #FFEB3B to #FF9800 */
+        .header-gradient {
+            background: linear-gradient(90deg, #FFEB3B 0%, #FF9800 100%);
+        }
+        .card-gradient {
+            background: linear-gradient(90deg, rgba(255, 235, 59, 0.6) 0%, rgba(255, 152, 0, 0.6) 100%);
+        }
+        .text-shadow-custom {
+            text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Adjusted shadow for modern look */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex justify-center antialiased">
+
+    <!-- Mobile Screen Wrapper: Centered and constrained -->
+    <div class="relative w-full max-w-md bg-stone-50 shadow-2xl min-h-screen md:min-h-[880px] md:my-4 overflow-auto">
+
+        <!-- Header Section: Title Bar -->
+        <header class="sticky top-0 z-10">
+            <!-- Gradient Title Area -->
+            <div class="header-gradient rounded-b-xl border border-black p-4 pt-8">
+                <!-- Back Button: UPDATED to homepage.html -->
+                <a href="homepage.html" class="absolute top-6 left-4 flex items-center space-x-1 text-black">
+                    <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3">
+                        <path d="M9 11L2 6L9 1" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <span class="font-semibold text-base">Kembali</span>
+                </a>
+
+                <!-- Main Title -->
+                <h1 class="text-center text-2xl font-semibold text-black mt-4 mb-2 text-shadow-custom">
+                    Menu & Notifikasi
+                </h1>
+
+                <!-- Search Input -->
+                <div class="flex items-center bg-white/50 rounded-full border border-black p-2 mt-4 backdrop-blur-sm">
+                    <!-- Search Icon (Magnifying Glass) -->
+                    <svg class="w-5 h-5 ml-2 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Cari" class="bg-transparent w-full text-black placeholder-black/70 focus:outline-none px-3 text-lg">
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Area: Menu Cards (Uses flow layout instead of absolute positioning) -->
+        <main class="p-5 space-y-4 pt-10">
+
+            <!-- 1. Profil Saya Card -->
+            <div class="card-gradient rounded-xl border border-black p-4 shadow-lg">
+                <h2 class="text-black font-extrabold text-lg mb-3">Profil Saya</h2>
+                <div class="flex items-start space-x-4">
+                    <!-- Profile Picture Placeholder -->
+                    <div class="relative flex-shrink-0 w-16 h-16 bg-white rounded-full border-2 border-black flex items-center justify-center overflow-hidden shadow-md">
+                        <!-- Head Placeholder -->
+                        <div class="w-6 h-6 bg-black rounded-full absolute top-2"></div>
+                        <!-- Body Placeholder (Simplified SVG/Shape) -->
+                        <svg class="absolute bottom-0" width="50" height="32" viewBox="0 0 50 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="25" cy="27" r="26" fill="black"/>
+                        </svg>
+                    </div>
+
+                    <!-- Profile Details - Tanda titik dua (:) sekarang sejajar rapi -->
+                    <div class="flex-grow grid grid-cols-[max-content_5px_1fr] gap-y-1 text-sm font-medium">
+                        <!-- Username -->
+                        <span class="text-black font-semibold">Username</span>
+                        <span class="text-black font-semibold">:</span>
+                        <span class="text-black">Pengguna</span>
+
+                        <!-- Email -->
+                        <span class="text-black font-semibold">Email</span>
+                        <span class="text-black font-semibold">:</span>
+                        <span class="text-black">dummy@gmail.com</span>
+
+                        <!-- Usia -->
+                        <span class="text-black font-semibold">Usia</span>
+                        <span class="text-black font-semibold">:</span>
+                        <span class="text-black">18 Tahun</span>
+                    </div>
+
+                    <!-- Edit Icon -->
+                    <button class="flex-shrink-0 text-black hover:text-gray-700 transition duration-150">
+                        <svg class="w-4 h-4" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.6144 3.88365L12.3538 5.14425C12.2253 5.27277 12.0175 5.27277 11.889 5.14425L8.85367 2.10897C8.72515 1.98045 8.72515 1.77263 8.85367 1.64411L10.1143 0.383511C10.6256 -0.127837 11.4569 -0.127837 11.971 0.383511L13.6144 2.02694C14.1285 2.53828 14.1285 3.36957 13.6144 3.88365ZM7.77081 2.72696L0.590004 9.90772L0.0102901 13.2301C-0.0690105 13.6786 0.322023 14.0669 0.770482 13.9903L4.0929 13.4079L11.2737 6.2271C11.4022 6.09858 11.4022 5.89076 11.2737 5.76224L8.23841 2.72696C8.10715 2.59844 7.89933 2.59844 7.77081 2.72696ZM3.39287 9.29246C3.24247 9.14206 3.24247 8.90143 3.39287 8.75103L7.604 4.53993C7.7544 4.38953 7.99504 4.38953 8.14543 4.53993C8.29583 4.69032 8.29583 4.93096 8.14543 5.08135L3.9343 9.29246C3.7839 9.44286 3.54327 9.44286 3.39287 9.29246Z" fill="black"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 2. Aktivitas Saya Card -->
+            <div class="card-gradient rounded-xl border border-black p-4 shadow-lg">
+                <h2 class="text-black font-extrabold text-lg mb-2">Aktivitas Saya</h2>
+                <nav class="space-y-3">
+                    <!-- Notifikasi -->
+                    <a href="notifications.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Bell Icon -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 22 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10.9375 25C12.6621 25 14.0611 23.6011 14.0611 21.875H7.814C7.814 23.6011 9.21292 25 10.9375 25ZM21.4546 17.6899C20.5113 16.6763 18.7461 15.1514 18.7461 10.1562C18.7461 6.3623 16.086 3.3252 12.4991 2.58008V1.5625C12.4991 0.699707 11.7998 0 10.9375 0C10.0752 0 9.37601 0.699707 9.37601 1.5625V2.58008C5.7891 3.3252 3.12894 6.3623 3.12894 10.1562C3.12894 15.1514 1.3638 16.6763 0.420444 17.6899C0.127475 18.0049 -0.00240765 18.3813 3.37592e-05 18.75C0.00540485 19.5508 0.633823 20.3125 1.56742 20.3125H20.3077C21.2412 20.3125 21.8702 19.5508 21.875 18.75C21.8775 18.3813 21.7476 18.0044 21.4546 17.6899Z"/>
+                        </svg>
+                        <span>Notifikasi</span>
+                    </a>
+
+                    <!-- Riwayat Journaling -->
+                    <a href="journal_history.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Journal Icon (Book/Note) -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 22 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.875 17.5V1.25C21.875 0.46875 21.4062 0 20.625 0H4.6875C2.03125 0 0 2.03125 0 4.6875V20.3125C0 22.9688 2.03125 25 4.6875 25H20.625C21.25 25 21.875 24.5312 21.875 23.75V22.9688C21.875 22.6562 21.7188 22.3438 21.4062 22.0312C21.25 21.25 21.25 19.0625 21.4062 18.4375C21.7188 18.2812 21.875 17.9688 21.875 17.5ZM6.49805 7.05029L7.53613 8.08838C7.6123 8.16455 7.7124 8.20264 7.8125 8.20264C7.9126 8.20264 8.01221 8.16455 8.08887 8.08838C8.24121 7.93603 8.24121 7.68848 8.08887 7.53613L6.79883 6.24609C7.28711 5.22559 8.08008 4.39209 9.06299 3.84082C8.77051 4.31641 8.59375 4.87012 8.59375 5.46875C8.59375 6.44336 9.04932 7.30322 9.74902 7.87646C9.27783 8.36768 8.98438 9.03125 8.98438 9.76562C8.98438 11.0811 9.91406 12.1777 11.1514 12.4395L11.2178 10.8423L10.7114 11.186C10.6777 11.208 10.6396 11.2197 10.6016 11.2197C10.5527 11.2197 10.5049 11.2012 10.4673 11.1665C10.4351 11.136 10.4142 11.0955 10.4081 11.0516C10.402 11.0076 10.411 10.9629 10.4336 10.9248L10.8506 10.2261L9.97607 10.0444C9.88525 10.0254 9.82031 9.94531 9.82031 9.85303C9.82031 9.76074 9.88525 9.68066 9.97607 9.66162L10.8506 9.47998L10.4336 8.78125C10.3872 8.70264 10.4009 8.60205 10.4673 8.53955C10.5337 8.47607 10.6353 8.46924 10.7114 8.51953L11.2979 8.91797L11.5234 3.50732C11.5278 3.40283 11.6143 3.32031 11.7188 3.32031C11.8232 3.32031 11.9097 3.40283 11.9141 3.50732L12.1426 8.99023L12.8359 8.51904C12.873 8.4946 12.9172 8.4833 12.9615 8.48693C13.0057 8.49055 13.0475 8.50891 13.0801 8.53906C13.1123 8.56957 13.1331 8.6101 13.1392 8.65401C13.1454 8.69793 13.1364 8.74262 13.1138 8.78076L12.6968 9.47949L13.5713 9.66113C13.6621 9.68018 13.7271 9.76025 13.7271 9.85254C13.7271 9.94482 13.6621 10.0249 13.5713 10.0439L12.6968 10.2256L13.1138 10.9243C13.1602 11.0029 13.1465 11.1035 13.0801 11.166C13.0425 11.2012 12.9937 11.2192 12.9458 11.2192C12.9077 11.2192 12.8696 11.208 12.8359 11.1855L12.2168 10.7646L12.2866 12.4385C13.5234 12.1777 14.4531 11.0811 14.4531 9.76562C14.4531 9.03125 14.1597 8.36768 13.6885 7.87646C14.3882 7.30322 14.8438 6.44336 14.8438 5.46875C14.8438 4.87012 14.667 4.31641 14.375 3.84131C15.3579 4.39209 16.1509 5.22607 16.6392 6.24658L15.3491 7.53662C15.1968 7.68897 15.1968 7.93652 15.3491 8.08887C15.4253 8.16504 15.5254 8.20312 15.6255 8.20312C15.7256 8.20312 15.8252 8.16504 15.9019 8.08887L16.9399 7.05078C17.085 7.54297 17.1875 8.0542 17.1875 8.59375C17.1875 8.61914 17.1807 8.64209 17.1802 8.66748L15.3682 10.2529C15.3295 10.2866 15.2979 10.3276 15.2751 10.3736C15.2523 10.4195 15.2388 10.4695 15.2354 10.5207C15.232 10.5719 15.2387 10.6232 15.2552 10.6718C15.2717 10.7204 15.2977 10.7652 15.3315 10.8037C15.3681 10.8457 15.4133 10.8793 15.464 10.9023C15.5148 10.9253 15.5698 10.9371 15.6255 10.937C15.7173 10.937 15.8086 10.9048 15.8828 10.8403L17.0347 9.83252C16.4707 12.2539 14.311 14.0625 11.7188 14.0625C9.12646 14.0625 6.9668 12.2539 6.40332 9.83301L7.55518 10.8408C7.6263 10.9033 7.71781 10.9377 7.8125 10.9375C7.9209 10.9375 8.0293 10.8926 8.10645 10.8042C8.24902 10.6416 8.23242 10.395 8.06982 10.2534L6.25781 8.66797C6.25732 8.64258 6.25049 8.61963 6.25049 8.59424C6.25 8.0542 6.35254 7.54297 6.49805 7.05029ZM18.5938 21.875H4.6875C3.75 21.875 3.125 21.25 3.125 20.3125C3.125 19.375 3.90625 18.75 4.6875 18.75H18.5938V21.875Z"/>
+                        </svg>
+                        <span>Riwayat Journaling</span>
+                    </a>
+
+                    <!-- Riwayat Kuesioner -->
+                    <a href="questionnaire_history.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Questionnaire Icon (List/Document) -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 22 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21.875 2.10937V19.7705C21.875 20.957 20.9473 21.8799 19.7656 21.8799H2.10938C0.942383 21.875 0 20.9668 0 19.7656V2.10937C0 0.932617 0.917969 0 2.10938 0H19.7705C20.9424 0 21.875 0.917969 21.875 2.10937ZM20.0537 19.7656V2.10937C20.0537 1.96289 19.9268 1.82617 19.7705 1.82617H19.3164L13.9307 5.46875L10.9375 3.03223L7.94922 5.46875L2.56348 1.82129H2.10938C1.95312 1.82129 1.82617 1.95801 1.82617 2.10449V19.7656C1.82617 19.9121 1.95312 20.0488 2.10938 20.0488H19.7705C19.9268 20.0537 20.0537 19.917 20.0537 19.7656Z" fill="black"/>
+                        </svg>
+                        <span>Riwayat Kuesioner</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- 3. Pengaturan Card -->
+            <div class="card-gradient rounded-xl border border-black p-4 shadow-lg">
+                <h2 class="text-black font-extrabold text-lg mb-2">Pengaturan</h2>
+                <nav class="space-y-3">
+                    <!-- Pengingat Harian -->
+                    <a href="reminder_settings.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Clock Icon -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.1094 0C5.41992 0 0 5.41992 0 12.1094C0 18.7988 5.41992 24.2188 12.1094 24.2188C18.7988 24.2188 24.2188 18.7988 24.2188 12.1094C24.2188 5.41992 18.7988 0 12.1094 0ZM14.8975 17.0947L10.5908 13.9648C10.4395 13.8525 10.3516 13.6768 10.3516 13.4912V5.27344C10.3516 4.95117 10.6152 4.6875 10.9375 4.6875H13.2812C13.6035 4.6875 13.8672 4.95117 13.8672 5.27344V11.9971L16.9678 14.2529C17.2314 14.4434 17.2852 14.8096 17.0947 15.0732L15.7178 16.9678C15.5273 17.2266 15.1611 17.2852 14.8975 17.0947Z" fill="black"/>
+                        </svg>
+                        <span>Pengingat Harian</span>
+                    </a>
+
+                    <!-- Tentang Aplikasi -->
+                    <a href="about.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Info Icon -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 25 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.2188 12.1094C24.2188 18.7987 18.7967 24.2188 12.1094 24.2188C5.42202 24.2188 0 18.7987 0 12.1094C0 5.42397 5.42202 0 12.1094 0C18.7967 0 24.2188 5.42397 24.2188 12.1094ZM12.1094 14.5508C10.8689 14.5508 9.86328 15.5564 9.86328 16.7969C9.86328 18.0374 10.8689 19.043 12.1094 19.043C13.3499 19.043 14.3555 18.0374 14.3555 16.7969C14.3555 15.5564 13.3499 14.5508 12.1094 14.5508ZM9.9769 6.47725L10.3391 13.1179C10.3561 13.4286 10.613 13.6719 10.9242 13.6719H13.2946C13.6058 13.6719 13.8627 13.4286 13.8796 13.1179L14.2418 6.47725C14.2602 6.1416 13.9929 5.85938 13.6568 5.85938H10.5619C10.2258 5.85938 9.95859 6.1416 9.9769 6.47725Z" fill="black"/>
+                        </svg>
+                        <span>Tentang Aplikasi</span>
+                    </a>
+
+                    <!-- Keluar dari Akun -->
+                    <a href="logout.html" class="flex items-center space-x-3 text-sm font-semibold text-black hover:text-gray-700 transition duration-150">
+                        <!-- Logout Icon -->
+                        <svg class="w-6 h-6 flex-shrink-0" viewBox="0 0 25 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.375 17.5H21.25V4.4316C21.25 3.36676 20.409 2.49996 19.375 2.49996H15V4.99996H18.75V20H24.375C24.7203 20 25 19.7203 25 19.375V18.125C25 17.7796 24.7203 17.5 24.375 17.5ZM12.1969 0.0394151L4.69688 1.98238C4.14023 2.12652 3.75 2.64449 3.75 3.23902V17.5H0.625C0.279687 17.5 0 17.7796 0 18.125V19.375C0 19.7203 0.279687 20 0.625 20H13.75V1.29606C13.75 0.453087 12.9859 -0.165272 12.1969 0.0394151ZM10.3125 11.25C9.79492 11.25 9.375 10.6902 9.375 9.99996C9.375 9.30973 9.79492 8.74996 10.3125 8.74996C10.8301 8.74996 11.25 9.30973 11.25 9.99996C11.25 10.6902 10.8301 11.25 10.3125 11.25Z"/>
+                        </svg>
+                        <span>Keluar dari Akun</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- 4. FAQ Link -->
+            <a href="faq.html" class="card-gradient rounded-xl border border-black p-3 flex justify-between items-center text-sm font-semibold text-black hover:text-gray-700 transition duration-150 mb-10">
+                <span>Frequently Ask Question</span>
+                <!-- Right Arrow Icon -->
+                <svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3">
+                    <path d="M1 1L8 6L1 11" stroke="currentColor" stroke-width="2"/>
+                </svg>
+            </a>
+        </main>
+        
+        <!-- Bottom Padding for spacing -->
+        <div class="h-10"></div>
+    </div>
+</body>
+</html>

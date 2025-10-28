@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuesioner PHQ-9 - SobatCurhat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFB340;
+            --primary-hover: #FFA726;
+            --primary-light: #FFF3E0;
+            --background: #FAFAF9;
+            --card: #FFFFFF;
+            --foreground: #1C1C1E;
+            --muted: #8E8E93;
+            --border: rgba(0, 0, 0, 0.06);
+            --success: #34C759;
+            --warning: #FF9500;
+            --danger: #FF3B30;
+            --radius: 1rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: linear-gradient(to bottom, #f0fdf4 0%, #ffffff 100%);
+            color: var(--foreground);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 28rem;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .header-content {
+            max-width: 28rem;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .back-button {
+            width: 2.5rem;
+            height: 2.5rem;
+            border: none;
+            background: transparent;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header-title h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--foreground);
+            margin-bottom: 0.125rem;
+        }
+
+        .header-subtitle {
+            font-size: 0.75rem;
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            height: 0.5rem;
+            background: rgba(0, 0, 0, 0.06);
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 1.5rem 0;
+        }
+
+        .question-intro {
+            margin-bottom: 1rem;
+        }
+
+        .question-intro p {
+            font-size: 0.875rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .question-text {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--foreground);
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.06);
+            border-radius: var(--radius);
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .option:hover {
+            border-color: rgba(0, 0, 0, 0.12);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .option input[type="radio"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        .option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            color: var(--foreground);
+            font-weight: 400;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            height: 3rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+        }
+
+        .btn:active {
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--foreground);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-hover);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: white;
+            border: 2px solid var(--border);
+            color: var(--foreground);
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.12);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--foreground);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-full {
+            width: 100%;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Result Card */
+        .result-container {
+            padding: 1.5rem 0;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem;
+            color: var(--success);
+        }
+
+        .result-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-card p {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .score-card {
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid;
+            transition: all 0.3s;
+        }
+
+        .score-card.minimal {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+
+        .score-card.ringan {
+            background: #fef9c3;
+            border-color: #fde047;
+        }
+
+        .score-card.sedang,
+        .score-card.cukup-berat {
+            background: #ffedd5;
+            border-color: #fdba74;
+        }
+
+        .score-card.berat {
+            background: #fee2e2;
+            border-color: #fca5a5;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .score-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-severity {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .score-card.minimal .score-number,
+        .score-card.minimal .score-severity {
+            color: #166534;
+        }
+
+        .score-card.ringan .score-number,
+        .score-card.ringan .score-severity {
+            color: #854d0e;
+        }
+
+        .score-card.sedang .score-number,
+        .score-card.sedang .score-severity,
+        .score-card.cukup-berat .score-number,
+        .score-card.cukup-berat .score-severity {
+            color: #9a3412;
+        }
+
+        .score-card.berat .score-number,
+        .score-card.berat .score-severity {
+            color: #991b1b;
+        }
+
+        .score-details {
+            border-top: 1px solid currentColor;
+            opacity: 0.8;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .score-details h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-details p {
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .score-message {
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        /* SVG Icons */
+        .icon {
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            vertical-align: middle;
+        }
+
+        /* Custom Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--foreground);
+        }
+
+        .modal-body {
+            font-size: 0.9375rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+        }
+
+        .modal-actions .btn {
+            flex: 1;
+            height: 2.75rem;
+        }
+
+        /* Hide by default */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .header-content {
+                padding: 1rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Question View -->
+    <div id="questionView">
+        <div class="header">
+            <div class="header-content">
+                <div class="header-top">
+                    <button class="back-button" onclick="handleBack()">
+                        <!-- Panah Kembali -->
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <div class="header-title">
+                        <h1>Kuesioner PHQ-9</h1>
+                        <p class="header-subtitle">Pertanyaan <span id="currentQ">1</span> dari <span id="totalQ">9</span></p>
+                    </div>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="main-content">
+                <div class="question-intro">
+                    <p>Dalam 2 minggu terakhir, seberapa sering kamu terganggu oleh masalah berikut:</p>
+                    <h2 class="question-text" id="questionText"></h2>
+                </div>
+
+                <div class="options" id="optionsContainer"></div>
+
+                <div class="button-group">
+                    <button class="btn btn-outline hidden" id="prevBtn" onclick="handlePrevious()">
+                        Sebelumnya
+                    </button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="handleNext()" disabled>
+                        Selanjutnya
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result View -->
+    <div id="resultView" class="hidden">
+        <div class="header">
+            <div class="header-content">
+                <div class="header-top">
+                    <button class="back-button" onclick="handleBack()">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <div class="header-title">
+                        <h1>Hasil PHQ-9</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="result-container">
+                <div class="result-card">
+                    <!-- Checkmark Icon -->
+                    <svg class="result-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <h2>Kuesioner Selesai!</h2>
+                    <p>Berikut hasil evaluasi kamu</p>
+                </div>
+
+                <div class="score-card" id="scoreCard">
+                    <div class="score-display">
+                        <div class="score-number" id="scoreNumber">0</div>
+                        <div class="score-severity" id="scoreSeverity">-</div>
+                    </div>
+
+                    <div class="score-message" id="scoreMessage"></div>
+
+                    <div class="score-details">
+                        <h3>Rekomendasi:</h3>
+                        <p id="scoreRecommendation"></p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons Container -->
+                <div id="actionButtons"></div>
+
+                <button class="btn btn-ghost btn-full" onclick="handleRetake()">
+                    Isi Ulang Kuesioner
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="customModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-body" id="modalMessage"></p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="modalConfirmBtn">Ya, Lanjutkan</button>
+                <button class="btn btn-outline" id="modalCancelBtn">Batalkan</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 SobatCurhat • Deteksi Dini Gangguan Mental</p>
+        <p style="margin-top: 0.5rem; font-size: 0.6875rem;">PHQ-9 adalah alat screening, bukan diagnosis. Konsultasikan dengan profesional untuk evaluasi lengkap.</p>
+    </div>
+
+    <script>
+        // PHQ-9 Questions
+        const questions = [
+            'Apakah Anda merasa kurang berminat atau kurang senang dalam melakukan sesuatu?',
+            'Apakah Anda merasa sedih, murung, atau putus asa?',
+            'Apakah Anda mengalami kesulitan untuk tidur, sering terbangun, atau justru tidur berlebihan?',
+            'Apakah Anda sering merasa lelah atau kurang berenergi?',
+            'Apakah nafsu makan Anda berkurang atau justru makan berlebihan?',
+            'Apakah Anda sering merasa buruk tentang diri sendiri, merasa gagal, atau merasa mengecewakan diri sendiri maupun keluarga?',
+            'Apakah Anda kesulitan untuk berkonsentrasi pada sesuatu, seperti membaca, bekerja, atau menonton televisi?',
+            'Apakah Anda bergerak atau berbicara dengan sangat lambat sehingga orang lain menyadarinya, atau sebaliknya—sering merasa gelisah dan tidak bisa diam?',
+            'Apakah Anda pernah memiliki pikiran untuk menyakiti diri sendiri atau merasa lebih baik jika tidak hidup lagi?'
+        ];
+
+        const options = [
+            { value: 0, label: 'Tidak pernah' },
+            { value: 1, label: 'Beberapa hari' },
+            { value: 2, label: 'Lebih dari separuh waktu yang dimaksud' },
+            { value: 3, label: 'Hampir setiap hari' }
+        ];
+
+        // State
+        let currentQuestion = 0;
+        let answers = {};
+        let modalCallback = null; // Used for custom confirmation modal
+
+        // --- Custom Modal Functions ---
+        function showModal(title, message, confirmText, callback) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            document.getElementById('modalConfirmBtn').textContent = confirmText;
+            document.getElementById('customModal').classList.remove('hidden');
+            // Use setTimeout to ensure the display change happens before adding 'open' for transition effect
+            setTimeout(() => {
+                document.getElementById('customModal').classList.add('open');
+            }, 10); 
+            modalCallback = callback;
+        }
+
+        function hideModal() {
+            document.getElementById('customModal').classList.remove('open');
+            // Use setTimeout to hide fully after transition is complete
+            setTimeout(() => {
+                document.getElementById('customModal').classList.add('hidden');
+            }, 300);
+            modalCallback = null;
+        }
+
+        // Setup listeners for modal buttons
+        document.getElementById('modalConfirmBtn').addEventListener('click', () => {
+            hideModal();
+            if (modalCallback) {
+                modalCallback(true);
+            }
+        });
+
+        document.getElementById('modalCancelBtn').addEventListener('click', () => {
+            hideModal();
+            if (modalCallback) {
+                modalCallback(false);
+            }
+        });
+        // --- End Custom Modal Functions ---
+
+
+        // Initialize
+        function init() {
+            document.getElementById('totalQ').textContent = questions.length;
+            renderQuestion();
+        }
+
+        // Render Question
+        function renderQuestion() {
+            const questionText = document.getElementById('questionText');
+            const currentQNum = document.getElementById('currentQ');
+            const optionsContainer = document.getElementById('optionsContainer');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const progressBar = document.getElementById('progressBar');
+
+            // Update question text
+            questionText.textContent = questions[currentQuestion];
+            currentQNum.textContent = currentQuestion + 1;
+
+            // Update progress bar (based on answered questions count)
+            const answeredCount = Object.keys(answers).filter(key => answers[key] !== undefined).length;
+            const progress = (answeredCount / questions.length) * 100;
+            progressBar.style.width = progress + '%';
+
+            // Show/hide previous button
+            if (currentQuestion > 0) {
+                prevBtn.classList.remove('hidden');
+            } else {
+                prevBtn.classList.add('hidden');
+            }
+
+            // Update next button text
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.textContent = 'Lihat Hasil';
+            } else {
+                nextBtn.textContent = 'Selanjutnya';
+            }
+
+            // Enable/disable next button
+            if (answers[currentQuestion] !== undefined) {
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.disabled = true;
+            }
+
+            // Render options
+            optionsContainer.innerHTML = '';
+            options.forEach(option => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                if (answers[currentQuestion] === option.value) {
+                    optionDiv.classList.add('selected');
+                }
+
+                const radioId = `q${currentQuestion}-${option.value}`;
+                
+                optionDiv.innerHTML = `
+                    <input type="radio" 
+                            id="${radioId}" 
+                            name="question${currentQuestion}" 
+                            value="${option.value}"
+                            ${answers[currentQuestion] === option.value ? 'checked' : ''}
+                            aria-label="${option.label}">
+                    <label for="${radioId}">${option.label}</label>
+                `;
+
+                optionDiv.addEventListener('click', () => {
+                    handleAnswer(option.value);
+                });
+
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        // Handle Answer Selection
+        function handleAnswer(value) {
+            // Convert value to integer as it comes from HTML attribute (string)
+            answers[currentQuestion] = parseInt(value); 
+            renderQuestion();
+        }
+
+        // Handle Next
+        function handleNext() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                showResult();
+            }
+        }
+
+        // Handle Previous
+        function handlePrevious() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Handle Back Button (Updated to use custom modal and new URL)
+        function handleBack() {
+            const resultView = document.getElementById('resultView');
+            
+            if (!resultView.classList.contains('hidden')) {
+                // Case 1: From Result View (Quiz Completed)
+                const title = 'Kembali ke Kuesioner Utama?';
+                const message = 'Hasil PHQ-9 kamu sudah dilihat. Kembali ke halaman kuesioner utama?';
+                const confirmText = 'Ya, Kembali';
+                
+                showModal(title, message, confirmText, (confirmed) => {
+                    if (confirmed) {
+                        window.location.href = 'kuisioner.html'; // Target updated
+                    }
+                });
+            } else {
+                // Case 2: From Question View (In Progress)
+                const isAnswered = answers[currentQuestion] !== undefined;
+
+                if (currentQuestion > 0 || isAnswered) {
+                    // Show confirmation if past Q1 or Q1 is answered
+                    const title = 'Keluar dari Kuesioner?';
+                    const message = 'Progress kuesioner saat ini akan hilang jika kamu keluar. Lanjutkan?';
+                    const confirmText = 'Ya, Keluar';
+
+                    showModal(title, message, confirmText, (confirmed) => {
+                        if (confirmed) {
+                            window.location.href = 'kuisioner.html'; // Target updated
+                        }
+                    });
+                } else {
+                    // Direct redirect if on Q1 and no answer selected
+                    window.location.href = 'kuisioner.html'; // Target updated
+                }
+            }
+        }
+
+        // Calculate Score
+        function calculateScore() {
+            // Ensure values are numbers before summing
+            return Object.values(answers).reduce((sum, value) => sum + (parseInt(value) || 0), 0);
+        }
+
+        // Get Result Interpretation
+        function getResultInterpretation(score) {
+            if (score <= 4) {
+                return {
+                    severity: 'Minimal',
+                    severityClass: 'minimal',
+                    message: 'Tidak ditemukan gejala depresi yang signifikan. Tetap jaga kesehatan mentalmu dengan pola hidup sehat!',
+                    recommendation: 'Lanjutkan aktivitas positif dan jaga keseimbangan hidup.',
+                    showServices: false
+                };
+            } else if (score <= 9) {
+                return {
+                    severity: 'Ringan',
+                    severityClass: 'ringan',
+                    message: 'Terdapat gejala depresi ringan. Perhatikan kondisi mentalmu dan coba lakukan aktivitas yang menyenangkan.',
+                    recommendation: 'Pertimbangkan untuk berbicara dengan teman dekat atau keluarga. Jika gejala berlanjut, konsultasi dengan profesional.',
+                    showServices: false
+                };
+            } else if (score <= 14) {
+                return {
+                    severity: 'Sedang',
+                    severityClass: 'sedang',
+                    message: 'Terdapat gejala depresi sedang. Penting untuk mencari dukungan dan pertimbangkan konseling.',
+                    recommendation: 'Sangat disarankan untuk berkonsultasi dengan psikolog atau konselor profesional.',
+                    showServices: true
+                };
+            } else if (score <= 19) {
+                return {
+                    severity: 'Cukup Berat',
+                    severityClass: 'cukup-berat',
+                    message: 'Terdapat gejala depresi yang cukup berat. Segera cari bantuan profesional.',
+                    recommendation: 'SEGERA konsultasi dengan psikolog atau psikiater. Kondisi ini memerlukan penanganan profesional.',
+                    showServices: true
+                };
+            } else {
+                return {
+                    severity: 'Berat',
+                    severityClass: 'berat',
+                    message: 'Terdapat gejala depresi berat. Sangat penting untuk mendapatkan bantuan profesional segera.',
+                    recommendation: 'SANGAT MENDESAK untuk berkonsultasi dengan psikiater atau layanan kesehatan mental. Jangan tunda, hubungi layanan darurat jika ada pikiran untuk menyakiti diri.',
+                    showServices: true
+                };
+            }
+        }
+
+        // Show Result
+        function showResult() {
+            const score = calculateScore();
+            const result = getResultInterpretation(score);
+
+            // Hide question view, show result view
+            document.getElementById('questionView').classList.add('hidden');
+            document.getElementById('resultView').classList.remove('hidden');
+
+            // Update result display
+            document.getElementById('scoreNumber').textContent = score;
+            document.getElementById('scoreSeverity').textContent = result.severity;
+            document.getElementById('scoreMessage').textContent = result.message;
+            document.getElementById('scoreRecommendation').textContent = result.recommendation;
+
+            // Update card styling
+            const scoreCard = document.getElementById('scoreCard');
+            scoreCard.className = 'score-card ' + result.severityClass;
+
+            // Add action buttons (Updated to use direct links)
+            const actionButtons = document.getElementById('actionButtons');
+            actionButtons.innerHTML = '';
+
+            if (result.showServices) {
+                const servicesBtn = document.createElement('button');
+                servicesBtn.className = 'btn btn-primary btn-full';
+                servicesBtn.textContent = 'Cari Layanan Kejiwaan';
+                // Direct link to layanan.html
+                servicesBtn.onclick = () => {
+                    window.location.href = 'layanan.html';
+                };
+                actionButtons.appendChild(servicesBtn);
+            }
+
+            const chatbotBtn = document.createElement('button');
+            chatbotBtn.className = 'btn btn-outline btn-full';
+            chatbotBtn.textContent = 'Bicara dengan Chatbot';
+            // Direct link to chatbot.html
+            chatbotBtn.onclick = () => {
+                window.location.href = 'chatbot.html';
+            };
+            actionButtons.appendChild(chatbotBtn);
+
+            // Placeholder for saving result (Firestore integration required for persistence)
+            saveResult(score, result);
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Save Result (Placeholder function)
+        function saveResult(score, result) {
+            // NOTE: Per requirement, localStorage is forbidden. 
+            // In a real SobatCurhat application, you would use Firebase/Firestore 
+            // here to save the history for the authenticated user.
+            const historyItem = {
+                id: 'phq9-' + Date.now(),
+                score: score,
+                severity: result.severity,
+                answers: answers,
+                timestamp: new Date().toISOString(),
+            };
+            
+            console.log('PHQ-9 Result Saved (Placeholder, use Firestore in production):', historyItem);
+        }
+
+        // Handle Retake
+        function handleRetake() {
+            currentQuestion = 0;
+            answers = {};
+            document.getElementById('questionView').classList.remove('hidden');
+            document.getElementById('resultView').classList.add('hidden');
+            renderQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

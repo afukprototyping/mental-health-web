@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layanan Kejiwaan (Fixed Layout Rapi)</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Poppins Font --><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Mengatur body agar konten terpusat dan mudah dilihat di layar lebar */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        /* Container utama dengan dimensi tetap (Fixed) 414px x 896px sesuai permintaan */
+        .fixed-container {
+            width: 414px;
+            height: 896px;
+            background: #FFFEF0; /* Light cream background sesuai desain */
+            position: relative; /* Penting untuk penempatan elemen absolut di dalamnya */
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Latar Belakang Gradient Atas (Diperkecil dan diposisikan ulang) */
+        .top-status-bar {
+            width: 418px;
+            height: 70px; /* Diperkecil dari 111px */
+            left: -2px;
+            top: -14px;
+            position: absolute;
+            opacity: 0.60;
+            background: linear-gradient(90deg, #FFEB3B 0%, #FF9800 100%);
+            border-radius: 20px;
+            border: 1px black solid;
+        }
+        
+        /* Latar Belakang Kartu Darurat (Meniru Rectangle 29) */
+         .emergency-card-bg {
+            /* Koordinat ini akan di-override secara inline di HTML */
+            width: 376px;
+            left: 18px;
+            position: absolute;
+            opacity: 0.90; 
+            background: linear-gradient(90deg, #FFEB3B 0%, #FF9800 100%);
+            border-radius: 20px;
+            border: 2px black solid;
+            padding: 18px 24px 18px 24px; /* Padding untuk konten kartu */
+         }
+
+        /* Styling untuk tombol kontak di dalam kartu darurat */
+         .contact-button {
+             background-color: white;
+             border: 1px solid #ccc;
+             border-radius: 12px;
+             padding: 12px;
+             transition: all 0.2s;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+             text-align: left;
+             display: flex;
+             align-items: center;
+         }
+
+         .contact-button:hover {
+             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+             transform: translateY(-1px);
+         }
+    </style>
+</head>
+<body>
+    <div id="messageBox" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black text-white px-4 py-2 rounded-lg shadow-xl hidden transition-opacity duration-300"></div>
+
+    <!-- JavaScript Functions for Interaction --><script>
+        function showMessage(msg) {
+            const box = document.getElementById('messageBox');
+            box.textContent = msg;
+            box.classList.remove('hidden', 'opacity-0');
+            box.classList.add('opacity-100');
+            setTimeout(() => {
+                box.classList.remove('opacity-100');
+                box.classList.add('opacity-0');
+                setTimeout(() => box.classList.add('hidden'), 300);
+            }, 1800);
+        }
+
+        // FUNGSI INI SUDAH DIPERBARUI UNTUK MENGARAHKAN KE homepage.html
+        function handleBack() {
+            // Mengarahkan ke homepage.html
+            window.location.href = 'homepage.html';
+        }
+        
+        function handleSearch() {
+            const query = document.getElementById('searchQuery').value;
+            showMessage(query ? `Mencari: "${query}"...` : "Masukkan kata kunci untuk mencari.");
+        }
+
+        function handleCall(service) {
+             showMessage(`Mengarahkan ke layanan: ${service}... (Ini adalah demo)`);
+        }
+    </script>
+
+    <!-- Main Container - Fixed Dimensions 414x896 --><div class="fixed-container">
+
+        <!-- Top Status Bar Area (Background Gradient - Rectangle 27) --><div class="top-status-bar"></div>
+        
+        <!-- Back Button Area (Posisi Top disesuaikan dari 20px menjadi 15px) --><header class="absolute top-[15px] left-[20px] z-10 flex items-center">
+            <button onclick="handleBack()" class="flex items-center text-black hover:text-orange-600 transition p-1 -ml-1 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 mr-0.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                <span class="text-lg font-semibold">Kembali</span> <!-- Ukuran font diperkecil ke 'text-lg' --></button>
+        </header>
+
+        <!-- Main Title (Posisi Top disesuaikan dari 85px menjadi 80px) --><h1 class="absolute w-[261px] h-[51px] left-[77px] top-[80px] text-center text-3xl font-extrabold text-black drop-shadow-sm tracking-tight flex items-center justify-center">
+            Layanan Kejiwaan
+        </h1>
+        
+        <!-- Teks Pengantar Diperjelas (Posisi Top disesuaikan dari 165px menjadi 160px) --><div class="absolute w-[361px] left-[27px] top-[160px] text-center">
+             <h2 class="text-xl font-extrabold text-black mb-1 drop-shadow-sm">
+                Anda Tidak Sendirian!
+            </h2>
+            <p class="text-base font-normal text-gray-700 leading-snug">
+                Temukan dukungan profesional di sekitar Anda atau hubungi kontak darurat jika dalam kondisi mendesak.
+            </p>
+        </div>
+
+
+        <!-- Search Bar Container (Posisi Top disesuaikan dari 290px menjadi 285px) --><div class="absolute w-[372px] h-[44px] left-[22px] top-[285px] rounded-full border-2 border-black shadow-md bg-gradient-to-r from-yellow-300 to-orange-400 p-1 flex items-center space-x-2">
+            
+            <!-- Search Icon --><div class="flex items-center justify-center w-7 h-7 ml-1">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-black">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+            
+            <!-- Input Text placeholder diubah --><input id="searchQuery" type="text" placeholder="Cari layanan, psikolog, atau kota..." class="flex-grow bg-transparent text-base font-normal focus:outline-none placeholder-black pr-2" style="width: 250px;" />
+            
+            <!-- Search Button (Tombol +) --><button onclick="handleSearch()" class="w-8 h-8 mr-1 bg-black rounded-full flex items-center justify-center text-white p-1 hover:bg-gray-800 transition shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Emergency Contact Card Content (Posisi Top disesuaikan dari 350px menjadi 345px) --><div class="emergency-card-bg space-y-4" style="top: 345px;"> 
+            
+            <!-- Judul Butuh Bantuan --><h2 class="text-center text-xl font-extrabold text-black border-b border-black/20 pb-3">
+                Butuh Bantuan Segera?
+            </h2>
+
+            <!-- Contact List --><div class="space-y-3">
+                
+                <!-- Contact Item 1: SEJIWA (HANYA IKON HATI MERAH) --><button onclick="handleCall('SEJIWA')" class="contact-button w-full">
+                    <!-- Ikon Hati Merah Saja -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="flex-shrink-0 w-6 h-6 mr-3" fill="none">
+                        <!-- Heart Fill (Merah/Red-600) -->
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5c0-3.08 2.42-5.5 5.5-5.5c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3c3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#dc2626"/>
+                    </svg>
+
+                    <div class="flex-grow">
+                        <div class="text-sm font-bold text-left">Layanan Kesehatan Jiwa (SEJIWA)</div>
+                        <div class="text-xs text-gray-500 text-left">Kementerian Kesehatan RI</div>
+                    </div>
+                </button>
+
+                <!-- Contact Item 2: Into The Light Indonesia --><button onclick="handleCall('Into The Light')" class="contact-button w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 w-6 h-6 text-blue-600 mr-3">
+                        <circle cx="12" cy="12" r="10" />
+                        <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                    </svg>
+                    <div class="flex-grow">
+                        <div class="text-sm font-bold text-left">Bantuan Konseling Bunuh Diri</div>
+                        <div class="text-xs text-gray-500 text-left">Into The Light Indonesia</div>
+                    </div>
+                </button>
+
+                <!-- Contact Item 3: Pijar Psikologi --><button onclick="handleCall('Pijar Psikologi')" class="contact-button w-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 w-6 h-6 text-green-600 mr-3">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" x2="22" y1="12" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    <div class="flex-grow">
+                        <div class="text-sm font-bold text-left">Layanan Psikolog (Online/Offline)</div>
+                        <div class="text-xs text-gray-500 text-left">Pijar Psikologi (*Berbayar)</div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Catatan Kaki --><p class="text-right text-xs font-normal pt-2 border-t border-black/20 text-gray-700">
+                <span class="font-bold">*Layanan Pijar Psikologi berbayar.</span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
